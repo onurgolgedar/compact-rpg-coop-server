@@ -1,0 +1,7 @@
+function NetCodes() {
+	#macro CODE_CONNECT_COOP 7747
+	#macro CODE_DISCONNECT 5001
+	
+	#macro CODE_HOST_COOP 7748
+	#macro CODE_JOIN_COOP 7749
+}
