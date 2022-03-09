@@ -1,6 +1,6 @@
 function _server_init() {
-	global.socket = network_create_server(network_socket_tcp, PORT_TCP, MAX_CLIENTS)
-	global.socket_udp = network_create_server(network_socket_udp, PORT_TCP, MAX_CLIENTS)
+	global.socket = network_create_server(network_socket_tcp, PORT_TCP_COOP, MAX_CLIENTS)
+	global.socket_udp = network_create_server(network_socket_udp, PORT_TCP_COOP, MAX_CLIENTS)
 }
 
 /// @param socketID

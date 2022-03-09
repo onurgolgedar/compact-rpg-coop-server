@@ -1,4 +1,5 @@
 function NetCodes() {
+	#macro CODE_CONNECT 5000
 	#macro CODE_CONNECT_COOP 7747
 	#macro CODE_DISCONNECT 5001
 	

@@ -19,6 +19,27 @@ function net_buffer_get_type() {
 	}
 }
 
+function net_buffer_get_type_reverse() {
+	switch (argument[0]) {
+		case buffer_bool:
+			return BUFFER_TYPE_BOOL
+		case buffer_u8:
+			return BUFFER_TYPE_BYTE
+		case buffer_s16:
+			return BUFFER_TYPE_INT16
+		case buffer_s32:
+			return BUFFER_TYPE_INT32
+		case buffer_f16:
+			return BUFFER_TYPE_FLOAT16
+		case buffer_f32:
+			return BUFFER_TYPE_FLOAT32
+		case buffer_f64:
+			return BUFFER_TYPE_FLOAT64
+		case buffer_string:
+			return BUFFER_TYPE_STRING
+	}
+}
+
 /// @param buffer
 function net_buffer_read() {
 	var buffer = argument[0]
@@ -47,7 +68,7 @@ function net_buffer_read() {
 /// @param redirection*
 function net_client_send() {
 	var code = argument[0]
-	var redirection = argument[5]
+	var redirection = argument_count < 5 ? 65535 : argument[4]
 	var data = argument_count == 1 ? 0 : argument[1]
 	var bufferType = argument_count == 1 ? BUFFER_TYPE_BOOL : argument[2]
 	var isUDP = argument_count < 5 ? false : argument[4]
@@ -57,7 +78,7 @@ function net_client_send() {
 	buffer_write(buffer, buffer_u8, bufferType)
 	buffer_write(buffer, buffer_u16, code)
 	buffer_write(buffer, net_buffer_get_type(bufferType), data)
-	buffer_write(buffer, buffer_u16, redirection != undefined ? redirection : 0)
+	buffer_write(buffer, buffer_u16, redirection)
 
 	if (isUDP)
 		network_send_udp(global.socket_CLIENT, global.serverIP, global.mainUDP_port, buffer, buffer_tell(buffer))
@@ -77,7 +98,7 @@ function net_client_send() {
 function net_server_send() {
 	var socketID = argument[0]
 	var code = argument[1]
-	var redirection = argument_count < 7 ? undefined : argument[7]
+	var redirection = argument_count < 7 ? 65535 : argument[6]
 	var data = argument_count < 3 ? 0 : argument[2]
 	var location = argument_count < 6 ? 0 : argument[5]
 	var buffer = undefined
@@ -103,10 +124,10 @@ function net_server_send() {
 				buffer_write(buffer, buffer_u8, bufferType)
 				buffer_write(buffer, buffer_u16, code)
 				buffer_write(buffer, net_buffer_get_type(bufferType), data)
-				buffer_write(buffer, buffer_u16, redirection != undefined ? redirection : 0)
+				buffer_write(buffer, buffer_u16, redirection)
 			
 				if (isUDP)
-					network_send_udp(_socketID, _playerRow[? CLIENTS_IP_SERVER], PORT_UDP, buffer, buffer_tell(buffer))
+					network_send_udp(_socketID, _playerRow[? CLIENTS_IP_SERVER], PORT_UDP_COOP, buffer, buffer_tell(buffer))
 				else
 					network_send_packet(_socketID, buffer, buffer_tell(buffer))
 			}
@@ -119,12 +140,12 @@ function net_server_send() {
 		buffer_write(buffer, buffer_u8, bufferType)
 		buffer_write(buffer, buffer_u16, code)
 		buffer_write(buffer, net_buffer_get_type(bufferType), data)
-		buffer_write(buffer, buffer_u16, redirection != undefined ? redirection : 0)
+		buffer_write(buffer, buffer_u16, redirection)
 			
 		if (isUDP) {
 			var _playerRow = db_get_row(global.DB_SRV_TABLE_clients, socketID)
 			
-			network_send_udp(socketID, _playerRow[? CLIENTS_IP_SERVER], PORT_UDP, buffer, buffer_tell(buffer))
+			network_send_udp(socketID, _playerRow[? CLIENTS_IP_SERVER], PORT_UDP_COOP, buffer, buffer_tell(buffer))
 		}
 		else
 			network_send_packet(socketID, buffer, buffer_tell(buffer))
