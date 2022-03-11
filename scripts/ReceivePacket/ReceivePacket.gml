@@ -1,4 +1,9 @@
-function _net_receive_packet(code, pureData, socketID_sender, bufferInfo = BUFFER_INFO_DEFAULT, bufferType, fromHost = false, isUDP = false, ip_sender = false) {
+function _net_receive_packet(code, pureData, socketID_sender, bufferInfo = BUFFER_INFO_DEFAULT, bufferType, asyncMap) {
+	var port = asyncMap[? "port"]
+	var fromHost = port == PORT_TCP or port == PORT_UDP
+	var isUDP = false
+	var ip = asyncMap[? "ip"]
+	
 	var data
 	#region PARSE PARAMETERS
 	var parameterCount = 0
@@ -38,6 +43,7 @@ function _net_receive_packet(code, pureData, socketID_sender, bufferInfo = BUFFE
 			case CODE_CONNECT:
 				var socketID = db_find_value(global.DB_TABLE_clients, CLIENTS_SOCKETID, CLIENTS_SOCKETID_ON_COOP, socketID_sender)
 				db_set_row_value(global.DB_TABLE_clients, socketID, CLIENTS_SOCKETID_ON_SERVER, data)
+				
 				net_server_send(socketID, CODE_CONNECT, data, BUFFER_TYPE_FLOAT64)
 				break
 				
