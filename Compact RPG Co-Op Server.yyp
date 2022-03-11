@@ -2,7 +2,7 @@
   "resources": [
     {"id":{"name":"contServer","path":"objects/contServer/contServer.yy",},"order":1,},
     {"id":{"name":"DBFunctions","path":"scripts/DBFunctions/DBFunctions.yy",},"order":0,},
-    {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
+    {"id":{"name":"roomMain","path":"rooms/roomMain/roomMain.yy",},"order":0,},
     {"id":{"name":"ReceivePacket","path":"scripts/ReceivePacket/ReceivePacket.yy",},"order":5,},
     {"id":{"name":"DBEvents","path":"scripts/DBEvents/DBEvents.yy",},"order":2,},
     {"id":{"name":"NetConstants","path":"scripts/NetConstants/NetConstants.yy",},"order":0,},
@@ -32,14 +32,12 @@
     "children": [],
   },
   "RoomOrderNodes": [
-    {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"roomId":{"name":"roomMain","path":"rooms/roomMain/roomMain.yy",},},
   ],
   "Folders": [
     {"folderPath":"folders/Scripts.yy","order":5,"resourceVersion":"1.0","name":"Scripts","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Objects.yy","order":9,"resourceVersion":"1.0","name":"Objects","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Rooms.yy","order":10,"resourceVersion":"1.0","name":"Rooms","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Objects/Controls.yy","order":1,"resourceVersion":"1.0","name":"Controls","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Objects/Controls/Networking.yy","order":1,"resourceVersion":"1.0","name":"Networking","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Scripts/DB.yy","order":1,"resourceVersion":"1.0","name":"DB","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Scripts/DB/Library.yy","order":1,"resourceVersion":"1.0","name":"Library","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Scripts/Net.yy","order":2,"resourceVersion":"1.0","name":"Net","tags":[],"resourceType":"GMFolder",},
@@ -53,7 +51,7 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2022.2.0.614",
+    "IDEVersion": "2022.2.1.618",
   },
   "resourceVersion": "1.5",
   "name": "Compact RPG Co-Op Server",

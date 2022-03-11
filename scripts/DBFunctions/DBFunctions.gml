@@ -140,8 +140,9 @@ function db_set_row_value(table, primaryValue, column, value) {
 			break
 		}
 	}
-
-	row[? column] = value
+	
+	if (row != undefined)
+		row[? column] = value
 }
 
 function db_draw_table(table_x, table_y, table, columnCount) {
@@ -153,16 +154,16 @@ function db_draw_table(table_x, table_y, table, columnCount) {
 
 	draw_set_color(c_white)
 	for (var i = 0; i < columnCount; i++) {
-		draw_text(table_x+i*100, table_y, db_get_column_name(table, i))
-		draw_line_width(table_x+i*100, table_y+30, table_x+100+i*100, table_y+30, 3)
+		draw_text(table_x+i*200, table_y, db_get_column_name(table, i))
+		draw_line_width(table_x+i*200, table_y+30, table_x+200+i*200, table_y+30, 3)
 	}
 
 	for (var j = 0; j < gHeight; j++) {
 		for (var i = 0; i < columnCount; i++) {
 			var row = table.rows[| j]
 			
-			draw_text(table_x+i*100, table_y+40+j*30, row[? i])
-			draw_line(table_x+i*100, table_y+40+j*30+30, table_x+100+i*100, table_y+40+j*30+30)
+			draw_text(table_x+i*200, table_y+40+j*30, row[? i])
+			draw_line(table_x+i*200, table_y+40+j*30+30, table_x+200+i*200, table_y+40+j*30+30)
 		}
 	}
 	draw_set_color(c_black)
