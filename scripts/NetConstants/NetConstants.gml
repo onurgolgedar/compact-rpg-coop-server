@@ -8,6 +8,6 @@ function NetConstants() {
 	#macro BUFFER_TYPE_FLOAT64 60
 	#macro BUFFER_TYPE_STRING 100
 
-	#macro BUFFER_INFO_DEFAULT 65535
+	#macro BUFFER_INFO_DEFAULT 255
 	#macro SOCKET_ID_ALL 9999
 }
