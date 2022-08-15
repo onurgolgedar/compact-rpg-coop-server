@@ -14,7 +14,7 @@ function db_create_row(primaryValue) {
 }
 
 function db_create_table(tableName, tableID) {
-	return {rows: ds_list_create(), name: tableName, ID: tableID*100}
+	return { rows: ds_list_create(), name: tableName, ID: tableID*100 }
 }
 
 function db_delete_row(table, primaryValue) {

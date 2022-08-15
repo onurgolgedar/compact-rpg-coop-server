@@ -11,3 +11,5 @@ db_set_column_name(global.DB_TABLE_clients, CLIENTS_SOCKETID_ON_SERVER, "SocketI
 
 _db_event_table_creation()
 _db_event_table_column_names()
+
+global.drawEventEnabled = true

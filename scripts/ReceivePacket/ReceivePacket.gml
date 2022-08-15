@@ -5,11 +5,14 @@ function _net_receive_packet(code, pureData, socketID_sender, bufferInfo = BUFFE
 	var ip = asyncMap[? "ip"]
 	
 	var data
+	var dataWillBeDeleted = false
 	#region PARSE PARAMETERS
 	var parameterCount = 0
 	if (bufferInfo == BUFFER_INFO_DEFAULT and !fromHost and is_string(pureData)) {
-		if (string_char_at(pureData, 0) == "{" or string_char_at(pureData, 0) == "[")
+		if (string_char_at(pureData, 0) == "{" or string_char_at(pureData, 0) == "[") {
+			dataWillBeDeleted = true
 			data = json_parse(pureData)
+		}
 		else {
 			parameterCount = 1
 			data = pureData
@@ -20,15 +23,6 @@ function _net_receive_packet(code, pureData, socketID_sender, bufferInfo = BUFFE
 		data = pureData
 	}
 	#endregion
-
-	/*if (code != 2002 and code != 2001 and code != 2005 and code != 2003 and code != 2004 and
-		code != 3005 and code != 3000 and code != 3001 and code != 3002 and code != 3003 and
-		code != 1000 and code != 1001 and code != 1002 and code != 1003 and code != 1004 and
-		code != 2000 and code != 2002 and code != 7003 and code != 2007 and
-		code != 2006 and code != 1500 and code != 7001 and code != 5000 and code != 1501 and
-		code != 3004 and code != 5002 and code != 15002 and code != 4001 and
-		code != 6000 and code != 10300 and code != 10301)
-	show_debug_message("From: "+string(socketID_sender)+"\n[ Code: "+string(code)+"\n  Data: "+string(data)+" ]")*/
 
 	try {
 		switch(code) {
@@ -88,6 +82,9 @@ function _net_receive_packet(code, pureData, socketID_sender, bufferInfo = BUFFE
 				}
 				break
 		}
+		
+		if (dataWillBeDeleted)
+			delete data
 	}
 	catch (error) {
 		show_debug_message(error)

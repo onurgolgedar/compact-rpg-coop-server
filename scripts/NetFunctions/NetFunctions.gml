@@ -1,7 +1,4 @@
-/// @param buffer
-function net_buffer_read() {
-	var buffer = argument[0]
-
+function net_buffer_read(buffer) {
 	buffer_seek(buffer, buffer_seek_start, 0)
 	var bufferType = net_buffer_get_type(buffer_read(buffer, buffer_u8))
 	var code = buffer_read(buffer, buffer_u16)
@@ -74,18 +71,19 @@ function net_server_send() {
 		buffer_delete(buffer)
 }
 
-function net_make_buffer(code, data, bufferType, bufferInfo) {
+
+function net_make_buffer(code, data, bufferType, bufferinfo) {
 	var buffer = buffer_create(36, buffer_grow, 1)
 	buffer_seek(buffer, buffer_seek_start, 0)
 	buffer_write(buffer, buffer_u8, bufferType)
 	buffer_write(buffer, buffer_u16, code)
 	buffer_write(buffer, net_buffer_get_type(bufferType), data)
-	buffer_write(buffer, buffer_u16, bufferInfo)
+	buffer_write(buffer, buffer_u16, bufferinfo)
 	return buffer
 }
 
-function net_buffer_get_type() {
-	switch (argument[0]) {
+function net_buffer_get_type(bufferType) {
+	switch (bufferType) {
 		case BUFFER_TYPE_BOOL:
 			return buffer_bool
 		case BUFFER_TYPE_BYTE:
@@ -105,8 +103,8 @@ function net_buffer_get_type() {
 	}
 }
 
-function net_buffer_get_type_reverse() {
-	switch (argument[0]) {
+function net_buffer_get_type_reverse(bufferType) {
+	switch (bufferType) {
 		case buffer_bool:
 			return BUFFER_TYPE_BOOL
 		case buffer_u8:
