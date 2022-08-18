@@ -5,4 +5,6 @@ function NetCodes() {
 
 	#macro CODE_HOST_COOP 3
 	#macro CODE_JOIN_COOP 4
+	#macro CODE_REQUEST_JOIN_COOP 5
+	#macro CODE_AVAILABLE_GAMES_COOP 6
 }

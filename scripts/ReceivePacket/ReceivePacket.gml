@@ -29,9 +29,10 @@ function _net_receive_packet(code, pureData, socketID_sender, bufferInfo = BUFFE
 			case CODE_HOST_COOP:
 				var row = db_get_row(global.DB_TABLE_clients, socketID_sender)
 				row[? CLIENTS_HOST] = true
-				row[? CLIENTS_COOPID] = data
+				row[? CLIENTS_COOPID] = data.coopID
+				row[? CLIENTS_COOPPASSWORD] = data.coopPassword
 				
-				net_server_send(socketID_sender, CODE_HOST_COOP, data, BUFFER_TYPE_FLOAT64)
+				net_server_send(socketID_sender, CODE_HOST_COOP, data.coopID, BUFFER_TYPE_STRING)
 				break
 				
 			case CODE_CONNECT:
